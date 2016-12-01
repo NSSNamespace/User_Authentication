@@ -53,4 +53,4 @@ namespace User_Authentication.Models
             public bool QuantityGreaterThanOne { get; set; }
         }
     }
-}
+

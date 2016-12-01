@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using User_Authentication.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace User_Authentication.Data
 {
@@ -11,7 +13,7 @@ namespace User_Authentication.Data
         //Method: The initialize method creates a scoped variable "context," which represents a session with the database. If there are any products currently in the database, then it will not be seeded.
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new BangazonContext(serviceProvider.GetRequiredService<DbContextOptions<BangazonContext>>()))
+            using (var context = new ApplicationDbContext(serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
                 // Look for any products.
                 if (context.Product.Any())
