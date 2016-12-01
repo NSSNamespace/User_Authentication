@@ -2,31 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace User_Authentication.Models
 {
-    // Add profile data for application users by adding properties to the ApplicationUser class
-    public class ApplicationUser : IdentityUser
+    public class PaymentType
     {
+
+        [Key]
+        public int PaymentTypeId { get; set; }
+
         [Required]
         [DataType(DataType.Date)]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
 
         [Required]
-        public string FirstName { get; set; }
+        [StringLength(12)]
+        public string Description { get; set; }
 
         [Required]
-        public string LastName { get; set; }
-
-        [Required]
-        public string StreetAddress { get; set; }
-
-        public ICollection<Product> Products;
-        public ICollection<Order> Orders;
-
+        [StringLength(20)]
+        public string AccountNumber { get; set; }
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
     }
 }
