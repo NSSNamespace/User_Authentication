@@ -1,4 +1,4 @@
-﻿using System;
+﻿/* using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,28 +21,28 @@ namespace User_Authentication.Data
                     return;
                 }
 
-                var customers = new Customer[]
+                var ApplicationUsers = new ApplicationUser[]
                 {
-                  new Customer {
+                  new ApplicationUser {
                       FirstName = "Carson",
                       LastName = "Alexander",
                       StreetAddress = "100 Infinity Way"
                   },
-                  new Customer {
+                  new ApplicationUser {
                       FirstName = "Steve",
                       LastName = "Brownlee",
                       StreetAddress = "92 Main Street"
                   },
-                  new Customer {
+                  new ApplicationUser {
                       FirstName = "Tractor",
                       LastName = "Ryan",
                       StreetAddress = "1666 Catalina Blvd"
                   }
                 };
 
-                foreach (Customer c in customers)
+                foreach (ApplicationUser c in ApplicationUsers)
                 {
-                    context.Customer.Add(c);
+                    context.ApplicationUser.Add(c);
                 }
                 context.SaveChanges();
 
@@ -115,7 +115,7 @@ namespace User_Authentication.Data
                       ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Bed and Bath Housewares").ProductTypeSubCategoryId,
                       Title = "Throw Pillow",
                       Price = 7.49M,
-                      CustomerId = customers.Single(s => s.FirstName == "Tractor").CustomerId
+                     // ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Tractor").ApplicationUserId
                   },
                   new Product {
                       Description = "A 2012 iPod Shuffle. Headphones are included. 16G capacity.",
@@ -123,7 +123,7 @@ namespace User_Authentication.Data
                       ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "iPod Shuffle",
                       Price = 18.00M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                      //ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                   new Product {
                       Description = "Stainless steel refrigerator. Three years old. Minor scratches.",
@@ -131,7 +131,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Miscellaneous Appliances").ProductTypeSubCategoryId,
                       Title = "Samsung refrigerator",
                       Price = 500.00M,
-                      CustomerId = customers.Single(s => s.FirstName == "Carson").CustomerId
+                      //ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Carson").Id
                   },
                     new Product {
                       Description = "New 13-inch Macbook Pro, mid 2012 model.",
@@ -139,7 +139,7 @@ namespace User_Authentication.Data
                       Title = "Macbook Pro",
                       ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Price = 1099.00M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                      //ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                     new Product {
                       Description = "Bose® - SoundTrue® Around-Ear Headphones II (iOS) - Charcoal Black.",
@@ -147,7 +147,7 @@ namespace User_Authentication.Data
                       Title = "Bose Headphones",
                       ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Price = 129.99M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                      //ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                     new Product {
                       Description = "Mechanical gaming keyboard, all keys individually backlit and customizable.",
@@ -155,7 +155,7 @@ namespace User_Authentication.Data
                               ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "Logitech G910 keyboard",
                       Price = 139.00M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                     // ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                     new Product {
                       Description = "Optical gaming mouse, customizeble weight and lighting.",
@@ -163,7 +163,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "Logitech G502 mouse",
                       Price = 89.99M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                      //ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                     new Product {
                       Description = "14-inch full HD IPS display, aluminum body chromebook.",
@@ -171,7 +171,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "Acer Chromebook 14",
                       Price = 299.99M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                      //ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                     new Product {
                       Description = "HP Pavilion 21.5-Inch IPS LED HDMI VGA Monitor.",
@@ -179,7 +179,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "HP Flatscreen monitor",
                       Price = 99.99M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                      //ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                     new Product {
                       Description = "Cooler Master HAF 932 Advanced Full Tower Case with SuperSpeed USB 3.0",
@@ -187,7 +187,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "Cooler Master computer tower",
                       Price = 160.00M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                      //ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                     new Product {
                       Description = "eagate Expansion 1TB Portable External Hard Drive USB 3.0",
@@ -195,7 +195,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "Seagate external hard drive",
                       Price = 54.99M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                      //ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                     new Product {
                       Description = "Anker PowerLine Micro USB (3ft) - Durable Charging Cable.",
@@ -203,7 +203,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "Anker charging cable",
                       Price = 4.99M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                      //ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                   new Product {
                       Description = "Anker 40W 4-Port USB Wall Charger PowerPort 4, Multi-Port USB Charger with Foldable Plug",
@@ -211,7 +211,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "Anker wall charger",
                       Price = 25.99M,
-                      CustomerId = customers.Single(s => s.FirstName == "Tractor").CustomerId
+                      //ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Tractor").ApplicationUserId
                   },
                   new Product {
                       Description = "Hoover Linx BH50010 Cordless Stick Vacuum Cleaner",
@@ -219,7 +219,7 @@ namespace User_Authentication.Data
                       ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Kitchen Housewares").ProductTypeSubCategoryId,
                       Title = "Hoover vacuum",
                       Price = 95.30M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                     // ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                   new Product {
                       Description = "KRUPS EA8808 2-IN-1 Touch Cappuccino Fully Automatic Espresso Machine, 57-Ounce, Black",
@@ -227,7 +227,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Office Appliances").ProductTypeSubCategoryId,
                       Title = "Cappuccino and espresso machine",
                       Price = 1299.00M,
-                      CustomerId = customers.Single(s => s.FirstName == "Carson").CustomerId
+                    //  ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Carson").ApplicationUserId
                   },
                     new Product {
                       Description = "Ultrasonic Cool Mist Humidifier - Premium Humidifying Unit with Whisper-quiet Operation, Automatic Shut-off, and Night Light Function.",
@@ -235,7 +235,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "Ultrasonic humidifier",
                       Price = 49.99M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                     // ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                     new Product {
                       Description = "Apple Watch Sport, Space Grey Aluminum Case/Black Band, 42mm.",
@@ -243,7 +243,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "Apple smartwatch",
                       Price = 199.99M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                      //ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                     new Product {
                       Description = "Cambridge SoundWorks OontZ Angle 3 Next Generation Ultra Portable Wireless Bluetooth Speaker",
@@ -251,7 +251,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "Bluetooth speaker",
                       Price = 27.99M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                      //ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                     new Product {
                       Description = "Anker PowerCore 20100 - Ultra High Capacity Power Bank",
@@ -259,7 +259,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "Anker power bank",
                       Price = 39.99M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                      ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                     new Product {
                       Description = "Belkin 6-Outlet Power Strip Surge Protector with 2-Foot Power Cord, 200 Joules (2-Pack)",
@@ -267,7 +267,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "Belkin power strip",
                       Price = 9.37M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                      //ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                     new Product {
                       Description = "SanDisk Cruzer CZ36 64GB USB 2.0 Flash Drive",
@@ -275,7 +275,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "SanDisk flash drive",
                       Price = 19.45M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                     // ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                     new Product {
                       Description = "EVGA GeForce GTX 750 Ti FTW GDDR5 Graphics Card",
@@ -283,7 +283,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "EVGA graphics card",
                       Price = 132.37M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                      //ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                     new Product {
                       Description = "Intel Core i5 6600K 3.90 GHz Quad Core Skylake Desktop Processor",
@@ -291,7 +291,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "Intel Processor",
                       Price = 237.39M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                    //  ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                     new Product {
                       Description = "Corsair Vengeance Pro 16GB (2x8GB) DDR3 2400MHz PC3 19200 Desktop RAM, Red",
@@ -299,7 +299,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "Desktop RAM",
                       Price = 96.41M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                     // ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   },
                     new Product {
                       Description = "ASUS Z170-A ATX DDR4 Motherboard",
@@ -307,7 +307,7 @@ namespace User_Authentication.Data
                          ProductTypeSubCategoryId = productTypesSubCategories.Single(s => s.Name == "Indoor Electronics").ProductTypeSubCategoryId,
                       Title = "Asus motherboard",
                       Price = 149.98M,
-                      CustomerId = customers.Single(s => s.FirstName == "Steve").CustomerId
+                  //    ApplicationUserId = ApplicationUsers.Single(s => s.FirstName == "Steve").ApplicationUserId
                   }
                 };
 

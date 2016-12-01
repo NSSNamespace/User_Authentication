@@ -15,7 +15,6 @@ namespace User_Authentication.Data
         {
         }
 
-        public DbSet<Customer> Customer { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<ProductType> ProductType { get; set; }
         public DbSet<ProductTypeSubCategory> ProductTypeSubCategory { get; set; }
@@ -30,10 +29,7 @@ namespace User_Authentication.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
-
-            builder.Entity<Customer>()
-            .Property(b => b.DateCreated)
-            .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
+            
 
             builder.Entity<Order>()
                 .Property(b => b.DateCreated)

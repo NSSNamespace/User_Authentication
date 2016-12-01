@@ -41,8 +41,8 @@ namespace User_Authentication.Models
             public ProductTypeSubCategory ProductTypeSubCategory { get; set; }
 
             [Required]
-            public int CustomerId { get; set; }
-            public Customer Customer { get; set; }
+            public int ApplicationUserId { get; set; }
+            public ApplicationUser ApplicationUser { get; set; }
             public ICollection<LineItem> LineItem;
 
             [NotMappedAttribute]
