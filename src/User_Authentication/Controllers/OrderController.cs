@@ -7,22 +7,31 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using User_Authentication.Data;
 using User_Authentication.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using User_Authentication.Services;
+using Microsoft.Extensions.Logging;
+using User_Authentication.Models.ProductViewModels;
 
 //Authors: David Yunker & Elliott Williams
 
 namespace User_Authentication.Controllers
 {
 
+
     //Class: OrderController, which inherits from base class Controller 
     public class OrderController : Controller
 
     {
+        private readonly UserManager<ApplicationUser> _userManager;
+
         //Set a private property of BangazonContext on the controller so that it has access to the database
         private ApplicationDbContext context;
 
         //Method: Custom contructor whose purpose is make existing session with db (BangazonContext) available to other methods throughout the controller, which accepts the existing database session as argument
-        public OrderController(ApplicationDbContext ctx)
+        public OrderController(ApplicationDbContext ctx, UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
             context = ctx;
         }
 
@@ -30,13 +39,12 @@ namespace User_Authentication.Controllers
         [HttpPatch]
         public async Task<IActionResult> Confirm()
         {
-            var customer = ActiveCustomer.instance.Customer;
-            var activeOrder = await context.Order.Where(o => o.DateCompleted == null && o.CustomerId == customer.CustomerId).SingleOrDefaultAsync();
+            var user = await GetCurrentUserAsync();
+            var activeOrder = await context.Order.Where(o => o.DateCompleted == null && o.User.Id == user.Id).SingleOrDefaultAsync();
             activeOrder.DateCompleted = DateTime.Today;
             context.Update(activeOrder);
             await context.SaveChangesAsync();
-            BaseViewModel model = new BaseViewModel();
-            return View(model);
+            return View();
         }
         //Method: Purpose is to route the customer to the confirmation page once confirm button has been clicked and order date completed patch is completed
 
@@ -44,19 +52,22 @@ namespace User_Authentication.Controllers
         {
             ViewData["Message"] = @"Order Processed! 
             Thank you for shopping at Bangazon!";
-            BaseViewModel model = new BaseViewModel(context);
-            return View(model);
+            return View();
         }
 
+        private Task<ApplicationUser> GetCurrentUserAsync()
+        {
+            return _userManager.GetUserAsync(HttpContext.User);
+        }
         // Method: Purpose is to route the user to cart associated with the active customer
 
         [HttpGet]
         public async Task<IActionResult> Cart()
         {
-            var customer = ActiveCustomer.instance.Customer;
-            var activeOrder = await context.Order.Where(o => o.DateCompleted == null && o.CustomerId == customer.CustomerId).SingleOrDefaultAsync();
+            var user = await GetCurrentUserAsync();
+            var activeOrder = await context.Order.Where(o => o.DateCompleted == null && o.User.Id == user.Id).SingleOrDefaultAsync();
             Console.WriteLine(activeOrder);
-            OrderViewModel model = new OrderViewModel(context);
+            OrderViewModel model = new OrderViewModel();
 
             if (activeOrder == null)
             {
@@ -69,8 +80,9 @@ namespace User_Authentication.Controllers
                 model.DuplicateProducts.Add(duplicateProduct);
                 return View(model);
             }
+        
 
-            List<LineItem> LineItemsOnActiveOrder = context.LineItem.Where(li => li.OrderId == activeOrder.OrderId).ToList();
+        List<LineItem> LineItemsOnActiveOrder = context.LineItem.Where(li => li.OrderId == activeOrder.OrderId).ToList();
             List<Product> ListOfProducts = new List<Product>();
             List<Product> SingleProducts = new List<Product>();
             List<Product> DuplicateProducts = new List<Product>();

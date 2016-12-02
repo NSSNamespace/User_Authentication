@@ -9,8 +9,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace User_Authentication.Models.ProductViewModels
 {
-    public class ProductDetailViewModel
+    public class ProductDetail
     {
         public Product Product { get; set; }
+
+        public ProductDetail(ApplicationDbContext ctx)
+        {
+            var context = ctx;
+        }
     }
+    
 }
