@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Bangazon.Controllers
+namespace User_Authentication.Controllers
 {
     // Authors: Jammy Laird & Liz Sanger & Fletcher Watson
     // Class: PaymentController controller, which inherits from base class Controller
