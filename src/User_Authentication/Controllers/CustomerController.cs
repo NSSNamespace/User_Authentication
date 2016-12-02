@@ -38,7 +38,7 @@ public class CustomersController : Controller
         [HttpPost]
         [ValidateAntiForgeryToken]
         
-        public async Task<IActionResult> Create(Customer customer)
+        public async Task<IActionResult> Create(ApplicationUser customer)
         {
             CreateCustomerViewModel model = new CreateCustomerViewModel(context); 
 
@@ -104,7 +104,7 @@ namespace User_Authentication.Controllers
             [HttpPost]
             [ValidateAntiForgeryToken]
 
-            public async Task<IActionResult> Create(Customer customer)
+            public async Task<IActionResult> Create(ApplicationUser customer)
             {
                 CreateCustomerViewModel model = new CreateCustomerViewModel(context);
 
