@@ -33,19 +33,19 @@ namespace User_Authentication.Data
 
             builder.Entity<Order>()
                 .Property(b => b.DateCreated)
-                .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
+                .HasDefaultValueSql("getdate()");
 
             builder.Entity<Product>()
                 .Property(b => b.DateCreated)
-                .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
+                .HasDefaultValueSql("getdate()");
                 
             builder.Entity<PaymentType>()
                 .Property(b => b.DateCreated)
-                .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
+                .HasDefaultValueSql("getdate()");
             
             builder.Entity<ApplicationUser>()
                 .Property(b => b.DateCreated)
-                .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
+                .HasDefaultValueSql("getdate()");
         }
     }
 }
