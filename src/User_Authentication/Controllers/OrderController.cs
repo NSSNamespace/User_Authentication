@@ -10,7 +10,7 @@ using User_Authentication.Models;
 
 //Authors: David Yunker & Elliott Williams
 
-namespace Bangazon.Controllers
+namespace User_Authentication.Controllers
 {
 
     //Class: OrderController, which inherits from base class Controller 
