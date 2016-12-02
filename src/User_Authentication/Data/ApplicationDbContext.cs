@@ -15,12 +15,37 @@ namespace User_Authentication.Data
         {
         }
 
+        public DbSet<Product> Product { get; set; }
+        public DbSet<ProductType> ProductType { get; set; }
+        public DbSet<ProductTypeSubCategory> ProductTypeSubCategory { get; set; }
+        public DbSet<ApplicationUser>ApplicationUser { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<LineItem> LineItem { get; set; }
+        public DbSet<PaymentType> PaymentType { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+            
+
+            builder.Entity<Order>()
+                .Property(b => b.DateCreated)
+                .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
+
+            builder.Entity<Product>()
+                .Property(b => b.DateCreated)
+                .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
+                
+            builder.Entity<PaymentType>()
+                .Property(b => b.DateCreated)
+                .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
+            
+            builder.Entity<ApplicationUser>()
+                .Property(b => b.DateCreated)
+                .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
         }
     }
 }
