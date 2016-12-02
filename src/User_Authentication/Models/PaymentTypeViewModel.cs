@@ -9,8 +9,10 @@ namespace User_Authentication.Models.ViewModels
 {
     public class PaymentTypeViewModel    
     {
-
         public PaymentType PaymentType { get; set; }
-        public PaymentTypeViewModel(ApplicationDbContext ctx){ }
+        public PaymentTypeViewModel (ApplicationDbContext ctx)
+        {
+            var context = ctx; 
+        }
     }
 }

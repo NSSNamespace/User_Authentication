@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 //Author: David Yunker
 namespace User_Authentication.Models.ProductViewModels
 {
-    public class Order
+    public class OrderViewModel
     {
         public List<SelectListItem> PaymentTypeId { get; set; }
         public List<Product> Products { get; set; }
@@ -29,12 +29,11 @@ namespace User_Authentication.Models.ProductViewModels
         //Method Name: OrderViewModel custom contructor
         //Purpose of the Method: Upon construction this should take the context and send a list of select items of the type PaymentType to the View. They should be the paymentTypes of the active customer.
         //Arguments in Method: BangazonWebContext
-        public Order (ApplicationDbContext ctx)
+       /* public OrderViewModel ()
         {
-      //      var customer = ActiveCustomer.instance.Customer;
             var context = ctx;
             this.PaymentTypeId = context.PaymentType
-                .Where(pt => pt.ApplicationUserId == applicationuser.CustomerId)
+                .Where(pt => pt.User == User)
                 .AsEnumerable()
                 .Select(li => new SelectListItem
                 {
@@ -47,7 +46,7 @@ namespace User_Authentication.Models.ProductViewModels
                 Text = "Choose Payment Type",
                 Value = ""
             });
-        }
+        }*/
     }
 }
 

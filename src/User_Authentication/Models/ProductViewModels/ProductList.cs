@@ -11,5 +11,9 @@ namespace User_Authentication.Models.ProductViewModels
     public class ProductList
     {
         public IEnumerable<Product> Products { get; set; }
+        public ProductList(ApplicationDbContext ctx)
+        {
+            var context = ctx;
+        }
     }
 } 

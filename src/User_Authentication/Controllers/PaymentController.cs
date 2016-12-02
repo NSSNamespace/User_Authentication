@@ -8,7 +8,8 @@ using User_Authentication.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-
+using User_Authentication.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace User_Authentication.Controllers
 {
@@ -16,12 +17,15 @@ namespace User_Authentication.Controllers
     // Class: PaymentController controller, which inherits from base class Controller
     public class PaymentController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
+
         //Set a private property on OrderController that stores the current session with db
         private ApplicationDbContext context;
 
         //Method: a custom constructor for the payment controller that passes in BangazonContext as an argument so that the controller has access to the database 
-        public PaymentController(ApplicationDbContext cxt)
+        public PaymentController(ApplicationDbContext cxt, UserManager<ApplicationUser> user)
         {
+            _userManager = user;
             context = cxt;
         }
         //Method: Purpose is to inject the PaymentTypeViewModel into the Payment/Create view so that the customer can create a payment method
@@ -30,15 +34,19 @@ namespace User_Authentication.Controllers
             PaymentTypeViewModel model = new PaymentTypeViewModel(context);
             return View(model);
         }
+        private Task<ApplicationUser> GetCurrentUserAsync()
+        {
+            return _userManager.GetUserAsync(HttpContext.User);
+        }
 
         //Method: Purpose is to post a new payment type to the database and associate it with the active customer's id, accepts an argument of type Payment Type, which is composed of data injected in the payment/create form 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PaymentType paymentType)
         {
+            var user = await GetCurrentUserAsync();
             // Link the active customer's id to the newly created payment type
-            var customer = ActiveCustomer.instance.Customer;
-            paymentType.CustomerId = customer.CustomerId;
+            paymentType.User = user; 
 
             //if the payment type received from the form is valid, post it to the database and redirect the customer to the Order/Cart view
             if (ModelState.IsValid)

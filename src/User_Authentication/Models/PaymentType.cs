@@ -25,7 +25,6 @@ namespace User_Authentication.Models
         [Required]
         [StringLength(20)]
         public string AccountNumber { get; set; }
-        public int ApplicationUserId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }
