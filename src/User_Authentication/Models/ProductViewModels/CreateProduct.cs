@@ -10,6 +10,24 @@ namespace User_Authentication.Models.ProductViewModels
 {
     public class CreateProduct
     {
-        public IEnumerable<Product> Products { get; set; }
+        public List<SelectListItem> ProductTypeId { get; set; }
+        public CreateProduct(ApplicationDbContext ctx)
+        {
+
+            this.ProductTypeId = ctx.ProductType
+                                    .OrderBy(l => l.Label)
+                                    .AsEnumerable()
+                                    .Select(li => new SelectListItem
+                                    {
+                                        Text = li.Label,
+                                        Value = li.ProductTypeId.ToString()
+                                    }).ToList();
+
+            this.ProductTypeId.Insert(0, new SelectListItem
+            {
+                Text = "Choose category...",
+                Value = "0"
+            });
+        }
     }
 }
