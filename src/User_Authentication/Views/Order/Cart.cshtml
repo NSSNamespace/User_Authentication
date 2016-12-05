@@ -1,0 +1,79 @@
+@model User_Authentication.Models.ProductViewModels.OrderViewModel
+
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+<h1> @ViewData["Title"] </h1>
+
+<hr />
+
+<div class="row cartWrapper">
+    <div class="col-sm-8 cartLeftWrapper">
+
+        @foreach (var product in Model.SingleProducts)
+        {
+            if (product.Quantity != 0)
+            {
+                <div class="cartItem">
+                    <span class="cartItemSpec">
+                        <a asp-action="Detail" asp-route-id="@product.ProductId" asp-controller="Products">
+
+                            @Html.DisplayFor(modelItem => product.Title)
+
+                        </a>
+                    </span>
+
+                    <span class="cartItemSpec">
+                        $@Html.DisplayFor(modelItem => product.Price)
+                    </span>
+
+                    <span class="cartItemSpec">
+                        (@Html.DisplayFor(modelItem => product.Quantity))
+                    </span>
+                </div>
+            }
+        }
+        @foreach (var product in Model.DuplicateProducts)
+        {
+            if (product.Quantity != 0)
+            {
+                <div class="cartItem">
+                    <span class="cartItemSpec">
+                        <a asp-action="Detail" asp-route-id="@product.ProductId" asp-controller="Products">
+                            @Html.DisplayFor(modelItem => product.Title)
+                        </a>
+                    </span>
+
+                    <span class="cartItemSpec">
+                        $@Html.DisplayFor(modelItem => product.Price)
+                    </span>
+
+                    <span class="cartItemSpec">
+                        (@Html.DisplayFor(modelItem => product.Quantity))
+                    </span>
+                </div>
+            }
+        }
+
+        <span class="cartTotal"><strong>Cart Total:</strong> $@Model.CartTotal</span>
+    </div>
+
+
+
+
+    <div class="col-sm-4 cartRightWrapper">
+
+        <div class="cartRightItemWrapper text-center">
+            <a class="btn btn-danger" disabled asp-controller="Order" asp-action="Confirmation" id="Confirm">Submit Order</a>
+        </div>
+
+        <div class="cartRightItemWrapper text-center">
+            @Html.DropDownList("Payment.PaymentTypeId", @Model.PaymentTypeId)
+        </div>
+
+        <div class="cartRightItemWrapper text-center">
+            <a class="btn btn-danger" asp-controller="Payment" asp-action="Create">Add Payment</a>
+        </div>
+    </div>
+
+</div>
