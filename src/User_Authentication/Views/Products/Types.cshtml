@@ -11,7 +11,7 @@
         <div class="col-md-12"><h3>@Html.DisplayFor(modelItem => type.Label)</h3></div>
     </div>
 
-        @foreach (var subcat in Model.ProductTypeSubCategories)
+     @*@  @foreach (var subcat in Model.ProductTypeSubCategories)
         {
             if (subcat.ProductTypeId == type.ProductTypeId)
             {
@@ -19,5 +19,5 @@
                     <div class="col-md-12"><a asp-controller="Products" asp-action="ProductsInSubCategory" asp-route-id="@subcat.ProductTypeSubCategoryId"><span>@Html.DisplayFor(modelItem => subcat.Name)</span><span>(@Html.DisplayFor(modelItem => subcat.Quantity)</span>)</a></div>
                 </div>
             }
-        }
+        } *@
 }
