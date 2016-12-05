@@ -10,7 +10,9 @@ namespace User_Authentication.Models.ProductViewModels
 {
     public class CreateProduct
     {
+        public Product Product { get; set; }
         public List<SelectListItem> ProductTypeId { get; set; }
+        public List<SelectListItem> ProductTypeSubCategoryId { get; set; }
         public CreateProduct(ApplicationDbContext ctx)
         {
 
