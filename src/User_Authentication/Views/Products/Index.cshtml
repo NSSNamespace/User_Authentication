@@ -1,0 +1,19 @@
+@model User_Authentication.Models.ProductViewModels.ProductList
+
+@{
+    ViewData["Title"] = "Product Listing";
+}
+
+<h2 class="top-buffer">@ViewData["Title"]</h2>
+
+@foreach (var product in Model.Products)
+{
+    <div class="row productRow">
+
+        <div class="col-md-6"><a asp-action="Detail" asp-route-id="@product.ProductId">@Html.DisplayFor(modelItem => product.Title)</a></div>
+        <div class="col-md-2">$@Html.DisplayFor(modelItem => product.Price)</div>
+        <div class="col-md-2">@Html.DisplayFor(modelItem => product.Description)</div>
+        <div class="col-md-2">
+        </div>
+    </div>
+}

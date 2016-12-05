@@ -1,0 +1,40 @@
+@model User_Authentication.Models.ProductViewModels.ProductDetail
+@using Microsoft.AspNetCore.Identity
+@using User_Authentication.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<h2>@Html.DisplayFor(model => model.Product.Title)</h2>
+@if (@UserManager.GetUserName(User) != null)
+{
+    <h3>
+        Hello, @UserManager.GetUserName(User)!
+    </h3>
+}
+else
+{
+    <h4>Create an Account to Purchase This Item!</h4>
+}
+
+<div class="row">
+    <div class="col-md-3">@Html.DisplayFor(model => model.Product.Description)</div>
+    <div class="col-md-3">@Html.DisplayFor(model => model.Product.Price)</div>
+    <div class="col-md-3">@Html.DisplayFor(model => model.Product.DateCreated)</div>
+    @if (@UserManager.GetUserName(User) != null)
+    {
+        <div class="col-md-3"><button id="AddToCart" value="@Model.Product.ProductId">Add to cart</button></div>
+
+    }
+</div>
+
+<div>
+    Seller: @Html.DisplayFor(model => @UserManager.GetUserName(User))
+</div>
+
+<div>
+    &lt;&lt; <a asp-action="Index">Back to List</a>
+</div>
