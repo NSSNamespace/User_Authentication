@@ -67,7 +67,7 @@ namespace User_Authentication.Controllers
             var user = await GetCurrentUserAsync();
             var activeOrder = await context.Order.Where(o => o.DateCompleted == null && o.User.Id == user.Id).SingleOrDefaultAsync();
             Console.WriteLine(activeOrder);
-            OrderViewModel model = new OrderViewModel();
+            OrderViewModel model = new OrderViewModel(context, user);
 
             if (activeOrder == null)
             {
