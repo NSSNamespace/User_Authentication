@@ -75,6 +75,7 @@ namespace User_Authentication
             }
             else
             {
+
                 app.UseExceptionHandler("/Home/Error");
             }
 
@@ -83,6 +84,7 @@ namespace User_Authentication
             app.UseStaticFiles();
 
             app.UseIdentity();
+                DbInitializer.Initialize(app.ApplicationServices);
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 

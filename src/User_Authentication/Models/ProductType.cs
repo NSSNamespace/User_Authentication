@@ -18,6 +18,7 @@ namespace User_Authentication.Models
         [Required]
         [StringLength(50)]
         public string Label { get; set; }
+
         public ICollection<Product> Products;
     }
 }
