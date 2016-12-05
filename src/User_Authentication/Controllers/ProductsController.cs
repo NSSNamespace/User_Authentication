@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using User_Authentication.Models.ProductViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 
 //Authors: Jammy Laird, Liz Sanger, Elliott Williams, David Yunker, Fletcher Watson
@@ -68,23 +69,26 @@ namespace User_Authentication.Controllers
 
         //Method: Purpose is to send the customer's product to the database and then redirects the user to the homepage (AllProductsView)
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
 
         public async Task<IActionResult> Create(Product product)
         {
-            //This creates a new variable to hold our current instance of the ActiveCustomer class and then sets the active customer's id to the CustomerId property on the product being created so that a valid model is sent to the database
-            var user = await GetCurrentUserAsync();
-            product.User = user;
+            //Ignore user from model state
+            ModelState.Remove("product.User");
 
-            //This creates a new instance of the CreateProductViewModel so that we can return the same view (i.e., the existing product info user has entered into the form) if the model state is invalid when user tries to create product
-            CreateProduct model = new CreateProduct(context);
+            //This creates a new variable to hold our current instance of the ActiveCustomer class and then sets the active customer's id to the CustomerId property on the product being created so that a valid model is sent to the database
 
             if (ModelState.IsValid)
             {
+                var user = await GetCurrentUserAsync();
+                product.User = user;
                 context.Add(product);
                 await context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            //This creates a new instance of the CreateProductViewModel so that we can return the same view (i.e., the existing product info user has entered into the form) if the model state is invalid when user tries to create product
+            CreateProduct model = new CreateProduct(context);
             return View(model);
         }
 

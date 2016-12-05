@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using User_Authentication.Models;
 using User_Authentication.Data;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Identity;
 
 
 //Class: OrderViewModel class
@@ -19,7 +18,6 @@ namespace User_Authentication.Models.ProductViewModels
         public List<Product> Products { get; set; }
         public decimal CartTotal { get; set; }
         private ApplicationDbContext context;
-      //  private ActiveCustomer singleton = ActiveCustomer.instance;
 
         public List<Product> SingleProducts { get; set; }
 
@@ -29,9 +27,10 @@ namespace User_Authentication.Models.ProductViewModels
         //Method Name: OrderViewModel custom contructor
         //Purpose of the Method: Upon construction this should take the context and send a list of select items of the type PaymentType to the View. They should be the paymentTypes of the active customer.
         //Arguments in Method: BangazonWebContext
-       /* public OrderViewModel ()
+        public OrderViewModel (ApplicationDbContext ctx, ApplicationUser user)
         {
             var context = ctx;
+            var User = user;
             this.PaymentTypeId = context.PaymentType
                 .Where(pt => pt.User == User)
                 .AsEnumerable()
@@ -46,7 +45,7 @@ namespace User_Authentication.Models.ProductViewModels
                 Text = "Choose Payment Type",
                 Value = ""
             });
-        }*/
+        }
     }
 }
 
