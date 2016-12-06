@@ -20,6 +20,7 @@ namespace User_Authentication.Controllers
 
 
     //Class: OrderController, which inherits from base class Controller 
+    [Authorize]
     public class OrderController : Controller
 
     {
@@ -37,6 +38,7 @@ namespace User_Authentication.Controllers
 
         //Method: Purpose is to patch an order in database to reflect date completed when customer clicks confirm button
         [HttpPatch]
+        [Authorize]
         public async Task<IActionResult> Confirm()
         {
             var user = await GetCurrentUserAsync();
@@ -47,7 +49,7 @@ namespace User_Authentication.Controllers
             return View();
         }
         //Method: Purpose is to route the customer to the confirmation page once confirm button has been clicked and order date completed patch is completed
-
+        [Authorize]
         public IActionResult Confirmation()
         {
             ViewData["Message"] = @"Order Processed! 
@@ -62,6 +64,7 @@ namespace User_Authentication.Controllers
         // Method: Purpose is to route the user to cart associated with the active customer
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Cart()
         {
             var user = await GetCurrentUserAsync();
