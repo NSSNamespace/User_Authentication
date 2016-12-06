@@ -46,13 +46,11 @@ namespace User_Authentication.Controllers
         }
 
         //Method: purpose is to return the AllProductsView only show products in the selected filtered by subcategory. Accepts an argument of the selected subcategory's id
-        [Authorize]
         public async Task<IActionResult> ProductsInSubCategory([FromRoute] int id)
         {
             ProductList model = new ProductList(context);
 
             model.Products = await context.Product.Where(p => p.ProductTypeSubCategoryId == id).OrderBy(s => s.Title.ToUpper()).ToListAsync();
-            // codebase.Methods.Where(x => (x.Body.Scopes.Count > 5) && (x.Foo == "test"));
             return View("Index", model);
 
         }
@@ -96,7 +94,6 @@ namespace User_Authentication.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public IActionResult GetSubCategories([FromRoute]int id)
         {
             //get sub categories with that product type on them
@@ -134,7 +131,6 @@ namespace User_Authentication.Controllers
         }
 
         //Method: Purpose is to return a view that displays all the products of one category. Accepts one argument, passed in through route, of ProductTypeId.
-        [Authorize]
         public async Task<IActionResult> Type([FromRoute]int id)
         {
             ProductList model = new ProductList(context);
@@ -143,7 +139,6 @@ namespace User_Authentication.Controllers
         }
 
         //Method: Purpose is to render the ProductTypes view, which displays all product categories
-        [Authorize]
         public async Task<IActionResult> Types()
         {
             //This creates a new instance of the ProductTypesViewModel and passes in the current session with the database (context) as an argument
@@ -155,7 +150,6 @@ namespace User_Authentication.Controllers
             var subCats = context.ProductTypeSubCategory.ToList();
             //cycle through each subcategory and define its Quantity as 
             subCats.ForEach(sc => sc.Quantity = context.Product.Count(p => p.ProductTypeSubCategoryId == sc.ProductTypeSubCategoryId));
-            // model.ProductTypes = productTypes;
             return View(model);
         }
         //Method: Purpose is to return the Error view
@@ -189,7 +183,6 @@ namespace User_Authentication.Controllers
                 //Add the line item to the database
                 context.Add(lineItem);
                 await context.SaveChangesAsync();
-             //   return RedirectToAction("Index", "Products");
             }
 
             //If there is an open order, create a new line item and add it to that order
