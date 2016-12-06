@@ -40,7 +40,7 @@ namespace User_Authentication.Controllers
         public async Task<IActionResult> Confirm()
         {
             var user = await GetCurrentUserAsync();
-            var activeOrder = await context.Order.Where(o => o.DateCompleted == null && o.User.Id == user.Id).SingleOrDefaultAsync();
+            var activeOrder = await context.Order.Where(o => o.DateCompleted == null && o.User == user).SingleOrDefaultAsync();
             activeOrder.DateCompleted = DateTime.Today;
             context.Update(activeOrder);
             await context.SaveChangesAsync();
@@ -65,7 +65,7 @@ namespace User_Authentication.Controllers
         public async Task<IActionResult> Cart()
         {
             var user = await GetCurrentUserAsync();
-            var activeOrder = await context.Order.Where(o => o.DateCompleted == null && o.User.Id == user.Id).SingleOrDefaultAsync();
+            var activeOrder = await context.Order.Where(o => o.DateCompleted == null && o.User == user).SingleOrDefaultAsync();
             Console.WriteLine(activeOrder);
             OrderViewModel model = new OrderViewModel(context, user);
 

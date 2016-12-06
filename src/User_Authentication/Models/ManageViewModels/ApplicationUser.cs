@@ -28,6 +28,10 @@ namespace User_Authentication.Models
 
         public ICollection<Product> Products;
         public ICollection<Order> Orders;
+        public ICollection<LineItem> LineItems;
+
+
+
 
     }
 }
