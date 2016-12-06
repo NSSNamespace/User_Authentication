@@ -32,9 +32,9 @@ else
 </div>
 
 <div>
-    Seller: @Html.DisplayFor(model => @UserManager.GetUserName(User))
+    Seller: @Html.DisplayFor(model => model.Product.User.FirstName) @Html.DisplayFor(model => model.Product.User.LastName)
 </div>
-
+    
 <div>
     &lt;&lt; <a asp-action="Index">Back to List</a>
 </div>
