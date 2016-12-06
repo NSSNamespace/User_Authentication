@@ -4,8 +4,16 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
+
+
 @if (SignInManager.IsSignedIn(User))
+
 {
+    <ul class="nav navbar-nav">
+
+        <li><a asp-area="" asp-controller="Products" asp-action="Create">Sell a Product</a></li>
+        <li><a asp-area="" asp-controller="Products" asp-action="Types">Product Types </a></li>
+    </ul>
     <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
