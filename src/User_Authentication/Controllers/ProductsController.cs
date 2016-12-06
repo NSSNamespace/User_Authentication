@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace User_Authentication.Controllers
 {
     //Creates ProductsController
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -32,6 +33,7 @@ namespace User_Authentication.Controllers
         }
 
         //Method: creates async method for two purposes: extract the Customer table from current context for extraction into the dropdown menu and return the Index view of complete product list
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             // Create new instance of the view model
@@ -44,6 +46,7 @@ namespace User_Authentication.Controllers
         }
 
         //Method: purpose is to return the AllProductsView only show products in the selected filtered by subcategory. Accepts an argument of the selected subcategory's id
+        [Authorize]
         public async Task<IActionResult> ProductsInSubCategory([FromRoute] int id)
         {
             ProductList model = new ProductList(context);
@@ -61,6 +64,7 @@ namespace User_Authentication.Controllers
         //Method: purpose is to create Products/Create view that delivers the form to create a new product, including the product type dropdown (will need adjustment when creating subcategories) and customer dropdown on navbar
 
         [HttpGet]
+        [Authorize]
         public IActionResult Create()
         {
             CreateProduct model = new CreateProduct(context);
@@ -71,7 +75,6 @@ namespace User_Authentication.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> Create(Product product)
         {
             //Ignore user from model state
@@ -93,6 +96,7 @@ namespace User_Authentication.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult GetSubCategories([FromRoute]int id)
         {
             //get sub categories with that product type on them
@@ -101,7 +105,7 @@ namespace User_Authentication.Controllers
         }
 
         //Method: Purpose is to route user to the detail view on a selected product. Accepts an argument (passed in through the route) of the product's primary key (id)
-
+        [Authorize]
         public async Task<IActionResult> Detail([FromRoute]int? id)
         {
             //throw a 404(NotFound) error if method is called w/o id in route
@@ -130,6 +134,7 @@ namespace User_Authentication.Controllers
         }
 
         //Method: Purpose is to return a view that displays all the products of one category. Accepts one argument, passed in through route, of ProductTypeId.
+        [Authorize]
         public async Task<IActionResult> Type([FromRoute]int id)
         {
             ProductList model = new ProductList(context);
@@ -138,6 +143,7 @@ namespace User_Authentication.Controllers
         }
 
         //Method: Purpose is to render the ProductTypes view, which displays all product categories
+        [Authorize]
         public async Task<IActionResult> Types()
         {
             //This creates a new instance of the ProductTypesViewModel and passes in the current session with the database (context) as an argument
@@ -153,6 +159,7 @@ namespace User_Authentication.Controllers
             return View(model);
         }
         //Method: Purpose is to return the Error view
+        [AllowAnonymous]
         public IActionResult Error()
         {
             return View();
@@ -160,6 +167,7 @@ namespace User_Authentication.Controllers
 
         //Method: Purpose is to create a new line item in the database when a customer clicks the "Add to Cart" button on a product. Accepts an argument of the productId, which is passed in through the post request attached to event listener on "Add to Cart" button
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddToCart([FromRoute] int id)
         {
             var user = await GetCurrentUserAsync();

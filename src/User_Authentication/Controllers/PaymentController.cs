@@ -10,11 +10,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using User_Authentication.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace User_Authentication.Controllers
 {
     // Authors: Jammy Laird & Liz Sanger & Fletcher Watson
     // Class: PaymentController controller, which inherits from base class Controller
+    [Authorize]
     public class PaymentController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -29,6 +31,7 @@ namespace User_Authentication.Controllers
             context = cxt;
         }
         //Method: Purpose is to inject the PaymentTypeViewModel into the Payment/Create view so that the customer can create a payment method
+        [Authorize]
         public IActionResult Create()
         {
             PaymentTypeViewModel model = new PaymentTypeViewModel(context);
@@ -42,6 +45,7 @@ namespace User_Authentication.Controllers
         //Method: Purpose is to post a new payment type to the database and associate it with the active customer's id, accepts an argument of type Payment Type, which is composed of data injected in the payment/create form 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create(PaymentType paymentType)
         {
             var user = await GetCurrentUserAsync();
