@@ -165,7 +165,7 @@ namespace User_Authentication.Controllers
         {
             var user = await GetCurrentUserAsync();
             //Define "openOrder" as an order in the database associated with the customer's id but not yet completed
-            Order openOrder = await context.Order.Where(o => o.DateCompleted == null && o.User.Id == user.Id).SingleOrDefaultAsync();
+            Order openOrder = await context.Order.Where(o => o.DateCompleted == null && o.User == user).SingleOrDefaultAsync();
             //If there is no open order, create one and add the customer's id to the order 
             if (openOrder == null)
             {
@@ -182,7 +182,7 @@ namespace User_Authentication.Controllers
                 //Add the line item to the database
                 context.Add(lineItem);
                 await context.SaveChangesAsync();
-                // return RedirectToAction("Index", "Products");
+             //   return RedirectToAction("Index", "Products");
             }
 
             //If there is an open order, create a new line item and add it to that order
