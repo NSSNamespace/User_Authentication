@@ -17,12 +17,9 @@ using User_Authentication.Models.ProductViewModels;
 
 namespace User_Authentication.Controllers
 {
-
-
     //Class: OrderController, which inherits from base class Controller 
     [Authorize]
     public class OrderController : Controller
-
     {
         private readonly UserManager<ApplicationUser> _userManager;
 
@@ -62,7 +59,6 @@ namespace User_Authentication.Controllers
             return _userManager.GetUserAsync(HttpContext.User);
         }
         // Method: Purpose is to route the user to cart associated with the active customer
-
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Cart()
